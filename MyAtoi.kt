@@ -1,9 +1,4 @@
 fun main() {
-    // var s = "1337c0d3"
-    // var s = "words and 987"
-    // var s = "+-12"
-    // var s = ""
-    // var s = "  12    3   4   "
     var s = "00123"
     myAtoi(s)
 }
