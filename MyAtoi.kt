@@ -10,7 +10,7 @@ fun main() {
 
 enum class State {
     born,
-    again,
+    started,
     survived,
     dead
 }
@@ -20,9 +20,9 @@ class StateMachine {
     var sign = 1
     var result = 0
 
-    fun toAgain(ch: Char) {
+    fun toStarted(ch: Char) {
         sign = if (ch == '-') -1 else 1
-        currrentState = State.again
+        currrentState = State.started
     }
     
     fun toSurvived(digit: Int) {
@@ -37,7 +37,7 @@ class StateMachine {
 
     fun appendDigit(digit: Int) {
         if(Int.MAX_VALUE / 10 < result || (
-            Int.MAX_VALUE == result && Int.MAX_VALUE % 10 < digit)) {
+            Int.MAX_VALUE / 10 == result && Int.MAX_VALUE % 10 < digit)) {
                 if(sign == 1) {
                     result = Int.MAX_VALUE
                 } else {
@@ -60,7 +60,7 @@ class StateMachine {
 
                     }
                     ch == '+' || ch == '-' -> {
-                        toAgain(ch)
+                        toStarted(ch)
                     }
                     ch.isDigit() -> {
                         toSurvived(ch - '0')
@@ -70,7 +70,7 @@ class StateMachine {
                     }
                 }
             }
-            State.again, State.survived -> {
+            State.started, State.survived -> {
                 if (ch.isDigit()) {
                     toSurvived(ch - '0')                    
                 } else {
